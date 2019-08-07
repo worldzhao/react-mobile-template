@@ -1,6 +1,13 @@
 module.exports = {
-  presets: ['react-app'],
+  presets: [['react-app', { flow: false, typescript: true }]],
   plugins: [
-    ['@babel/plugin-proposal-decorators', { legacy: true }]
+    [
+      'import',
+      {
+        libraryName: 'dora-ui',
+        libraryDirectory: 'es',
+        style: 'css'
+      }
+    ]
   ]
 };
