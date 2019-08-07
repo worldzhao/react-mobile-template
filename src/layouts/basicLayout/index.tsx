@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './index.module.scss';
 
-const BasicLayout = props => {
+const BasicLayout: FC = props => {
   const { children } = props;
   return <div className={styles['basic-layout']}>{children}</div>;
 };

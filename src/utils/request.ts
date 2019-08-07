@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
+import { Response } from '@/typings';
 
 const instance = axios.create({
   timeout: 5000 // 超时时间 5s
@@ -17,7 +18,7 @@ instance.interceptors.request.use(
 // 增加响应拦截器
 instance.interceptors.response.use(
   response => {
-    return response.data;
+    return response;
   },
   error => {
     console.log(error.response);
@@ -25,8 +26,8 @@ instance.interceptors.response.use(
   }
 );
 
-function request(url, config = {}) {
-  return instance(url, config);
+function request<T>(config: AxiosRequestConfig) {
+  return instance.request<Response<T>>(config).then(res => res.data);
 }
 
 export default request;

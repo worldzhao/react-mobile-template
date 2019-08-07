@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Attributes } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Layout from '@/layouts';
 import { routerConfig } from './router';
@@ -9,7 +9,7 @@ function Router() {
       <Layout>
         <Switch>
           {routerConfig.map(props => (
-            <Route {...props} key={props.path} />
+            <Route {...props} key={props.path as Attributes['key']} />
           ))}
         </Switch>
       </Layout>

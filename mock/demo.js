@@ -8,16 +8,20 @@ const sleep = s => {
 module.exports = {
   // mock basic get request
   'GET /api/user': Mock.mock({
-    'id|+1': 10,
-    username: '@cname',
-    male: '@boolean',
-    'age|1': [18, 24, 8]
+    code: 0,
+    msg: '',
+    data: {
+      'id|+1': 10,
+      username: '@cname',
+      male: '@boolean',
+      'age|1': [18, 24, 8]
+    }
   }),
   // mock basic post request
   'POST /api/user': Mock.mock({
-    errorCode: 0,
-    displayMessage: null,
-    result: {
+    code: 0,
+    msg: '',
+    data: {
       'id|1': [1, 2, 3],
       username: '@cname',
       'sex|+1': 6
@@ -28,9 +32,13 @@ module.exports = {
     const { articleId } = req.params;
     return res.json(
       Mock.mock({
-        articleId: articleId,
-        title: '文章标题',
-        content: '@cparagraph'
+        code: 0,
+        msg: '',
+        data: {
+          articleId: articleId,
+          title: '文章标题',
+          content: '@cparagraph'
+        }
       })
     );
   },
@@ -40,9 +48,13 @@ module.exports = {
     const { password, username } = req.body;
     if (password === '888888' && username === 'admin') {
       return res.json({
-        id: 1,
-        username: 'kenny',
-        sex: 6
+        code: 0,
+        msg: '',
+        data: {
+          id: 1,
+          username: 'kenny',
+          age: 6
+        }
       });
     } else {
       return res.status(403).json({

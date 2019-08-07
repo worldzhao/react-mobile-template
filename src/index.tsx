@@ -3,12 +3,10 @@ import '@/common/scripts/rem';
 import '@/common/styles/index.scss';
 import Router from '@/router';
 import { env } from '@/utils';
-import { init } from '@rematch/core';
-import createLoadingPlugin from '@rematch/loading';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import * as models from './models';
+import { store } from './store';
 
 if (!env.isProd) {
   // 动态import vconsole，避免打包到同一个vendor，影响打包体积
@@ -18,11 +16,6 @@ if (!env.isProd) {
     new VConsole();
   })();
 }
-
-const store = init({
-  models,
-  plugins: [createLoadingPlugin({})]
-});
 
 ReactDOM.render(
   <Provider store={store}>
