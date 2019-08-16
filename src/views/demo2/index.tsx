@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Spin } from 'dora-ui';
-import {
-  RootState,
-  Dispatch,
-  RouteComponentProps,
-  GetUserParams,
-  PostUserParams,
-  DemoModelState
-} from '@/typings';
+import { RootState, Dispatch, GetUserParams, PostUserParams, DemoModelState } from '@/typings';
+import { RouteComponentProps } from 'react-router';
 import styles from './index.module.scss';
 
 const mapState = (store: RootState) => ({
@@ -41,22 +34,20 @@ class TSDemoWithRematch extends Component<Props, {}> {
     const { getUserAsync: getLoading, postUserAsync: postLoading } = demoEffectsLoading;
     const { userDataGet, userDataPost } = demo;
     if (userDataGet) {
-      console.log(userDataGet.id);
+      console.log('user age:', userDataGet.id);
     }
     console.log('本页面全局接口 model loading', demoModelLoading);
     console.log('接口 1 effect loading', getLoading);
     console.log('接口 2 effect loading', postLoading);
 
     return (
-      <Spin spinning={demoModelLoading} fullScreen>
-        <div className={styles.demoWrapper}>
-          <div className={styles.demo}>
-            <h2 className={styles.subtitle}>welcome to Iris</h2>
-          </div>
-          <p className={styles.content}>get:{JSON.stringify(userDataGet)}</p>
-          <p className={styles.content}>post:{JSON.stringify(userDataPost)}</p>
+      <div className={styles.demoWrapper}>
+        <div className={styles.demo}>
+          <h2 className={styles.subtitle}>welcome to Iris</h2>
         </div>
-      </Spin>
+        <p className={styles.content}>get:{JSON.stringify(userDataGet)}</p>
+        <p className={styles.content}>post:{JSON.stringify(userDataPost)}</p>
+      </div>
     );
   }
 }

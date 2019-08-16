@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { Response } from '@/typings';
 
 const instance = axios.create({
-  timeout: 5000 // 超时时间 5s
+  timeout: 3000 // 超时时间 5s
 });
 
 // 增加请求拦截器

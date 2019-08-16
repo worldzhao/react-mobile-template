@@ -4,7 +4,7 @@
 
 ```
 yarn start | yarn dev 启动开发环境
-yarn build:prod       打包生产环境
+yarn build            打包生产环境
 yarn build:analyze    进行打包分析
 ```
 

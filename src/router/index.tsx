@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Layout from '@/layouts';
 import { routerConfig } from './router';
 
-function Router() {
+const Router = () => {
   return (
     <BrowserRouter>
       <Layout>
@@ -15,6 +15,6 @@ function Router() {
       </Layout>
     </BrowserRouter>
   );
-}
+};
 
 export default Router;

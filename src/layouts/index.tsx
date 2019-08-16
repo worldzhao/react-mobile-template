@@ -1,12 +1,12 @@
-import React, { SFC } from 'react';
+import React from 'react';
+import { withRouter, RouteComponentProps } from 'react-router';
 import BasicLayout from './basicLayout';
 
-const Layout: SFC = props => {
+const Layout: React.FC<RouteComponentProps> = props => {
   const { children } = props;
   // 可以根据 pathname 自定义选择layout组件
-  // console.log(window.location.pathname);
-
+  // console.log(props.location.pathname);
   return <BasicLayout>{children}</BasicLayout>;
 };
 
-export default Layout;
+export default withRouter(Layout);
