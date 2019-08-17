@@ -3,8 +3,8 @@ import { GetUserParams, PostUserParams, DemoModelState } from '@/typings';
 
 export default {
   state: ({
-    userDataGet: null,
-    userDataPost: null
+    userDataGet: {},
+    userDataPost: {}
   } as any) as DemoModelState,
 
   effects: {
@@ -12,6 +12,7 @@ export default {
       const res = await getUser(payload);
       this.getUser(res);
     },
+
     async postUserAsync(payload: PostUserParams) {
       const res = await postUser(payload);
       this.postUser(res);

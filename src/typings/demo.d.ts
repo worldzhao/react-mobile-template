@@ -21,6 +21,6 @@ export interface PostUserResponse {
 }
 
 export interface DemoModelState {
-  userDataGet: GetUserResponse | null;
-  userDataPost: PostUserResponse | null;
+  userDataGet?: GetUserResponse;
+  userDataPost?: PostUserResponse;
 }

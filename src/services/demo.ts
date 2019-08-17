@@ -2,22 +2,15 @@ import { request } from '@/utils';
 import { GetUserParams, GetUserResponse, PostUserParams, PostUserResponse } from '@/typings';
 
 // get测试
-export const getUser = async (params: GetUserParams) => {
-  const res = await request<GetUserResponse>({ url: '/api/user', params });
-  // 判断请求是否成功 根据业务后端决定 有时候也需要将业务异常直接抛到Component
-  if (res.code === 0) {
-    return res.data;
-  }
-  return null;
+export const getUser = (params: GetUserParams) => {
+  return request<GetUserResponse>({ url: '/api/user', params });
 };
 
 // post测试
-
-export const postUser = async (data: PostUserParams) => {
-  const res = await request<PostUserResponse>({ url: '/api/login/account', method: 'post', data });
-  // 判断请求是否成功 根据业务后端决定
-  if (res.code === 0) {
-    return res.data;
-  }
-  return null;
+export const postUser = (data: PostUserParams) => {
+  return request<PostUserResponse>({
+    url: '/api/login/account',
+    method: 'post',
+    data
+  });
 };

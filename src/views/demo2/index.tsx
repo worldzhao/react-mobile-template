@@ -1,38 +1,45 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { RootState, Dispatch, GetUserParams, PostUserParams, DemoModelState } from '@/typings';
+import { RootState, Dispatch } from '@/typings';
 import { RouteComponentProps } from 'react-router';
 import styles from './index.module.scss';
 
-const mapState = (store: RootState) => ({
-  demo: store.demo as DemoModelState,
-  demoModelLoading: store.loading.models.demo, // models/demo 中只有要异步请求正在进行 该值便为true 作用域为model
-  demoEffectsLoading: store.loading.effects.demo // 该值为object，键名为effects键名 键值为loading状态
+const mapState = ({ demo, loading }: RootState) => ({
+  demoState: demo,
+  demoModelLoading: loading.models.demo, // models/demo 中只有要异步请求正在进行 该值便为true 作用域为model
+  demoEffectsLoading: loading.effects.demo // 该值为object，键名为effects键名 键值为loading状态
 });
 
-const mapDispatch = (dispatch: Dispatch) => ({
-  getUser: (params: GetUserParams) => {
-    dispatch.demo.getUserAsync(params);
-  },
-  postUser: (data: PostUserParams) => {
-    dispatch.demo.postUserAsync(data);
-  }
-});
+const mapDispatch = ({ demo }: Dispatch) => ({ demoDispatch: demo });
 
 type Props = ReturnType<typeof mapState> &
   ReturnType<typeof mapDispatch> &
   RouteComponentProps<{}> & {};
 
 class TSDemoWithRematch extends Component<Props, {}> {
-  async componentDidMount() {
-    this.props.getUser({ id: '1' });
-    this.props.postUser({ username: 'admin', password: '888888' });
+  componentDidMount() {
+    this.getUser();
+    this.postUser();
+  }
+
+  async getUser() {
+    const { demoDispatch } = this.props;
+    demoDispatch.getUserAsync({ id: '123' });
+  }
+
+  async postUser() {
+    const { demoDispatch } = this.props;
+    try {
+      await demoDispatch.postUserAsync({ username: 'admin', password: '888888' });
+    } catch (error) {
+      console.warn('code !== 0, 存在业务异常，此处进行业务异常相关提示处理');
+    }
   }
 
   render() {
-    const { demo, demoModelLoading, demoEffectsLoading } = this.props;
+    const { demoState, demoModelLoading, demoEffectsLoading } = this.props;
     const { getUserAsync: getLoading, postUserAsync: postLoading } = demoEffectsLoading;
-    const { userDataGet, userDataPost } = demo;
+    const { userDataGet, userDataPost } = demoState;
     if (userDataGet) {
       console.log('user age:', userDataGet.id);
     }
