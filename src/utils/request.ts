@@ -42,17 +42,18 @@ instance.interceptors.response.use(
     if (data.code !== 0) {
       return Promise.reject(data);
     }
-    // 不存在业务异常返回数据
+    // 业务正常流程返回数据
     return data.data;
   },
   error => {
     const { status } = error.response;
     console.warn(`http error: status-${status} message-${codeMessage[status]}`);
     // return Promise.reject(error); 非业务异常无需抛出错误 内部吞掉
+    return null;
   }
 );
 
-function request<T>(config: AxiosRequestConfig) {
+function request<T>(config: AxiosRequestConfig): Promise<T> | null {
   return (instance.request<Response<T>>(config) as any) as Promise<T>;
 }
 

@@ -3,8 +3,8 @@ import { GetUserParams, PostUserParams, DemoModelState } from '@/typings';
 
 export default {
   state: ({
-    userDataGet: {},
-    userDataPost: {}
+    userDataGet: null,
+    userDataPost: null
   } as any) as DemoModelState,
 
   effects: {

@@ -22,7 +22,7 @@ module.exports = {
     await sleep(2);
     const { password, username } = req.body;
     if (password === '888888' && username === 'admin') {
-      return res.json({
+      return res.status(200).json({
         code: -1,
         msg: '存在业务异常啦啦 快给个提示',
         data: {
