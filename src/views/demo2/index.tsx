@@ -32,7 +32,7 @@ class TSDemoWithRematch extends Component<Props, {}> {
     try {
       await demoDispatch.postUserAsync({ username: 'admin', password: '888888' });
     } catch (error) {
-      console.warn('code !== 0, 存在业务异常，此处进行业务异常相关提示处理');
+      console.warn('存在异常，可能为业务异常与非业务异常，此处应针对业务异常进行相关提示处理');
     }
   }
 

@@ -47,9 +47,10 @@ instance.interceptors.response.use(
   },
   error => {
     const { status } = error.response;
+    // 根据不同code 可进行不同提示
     console.warn(`http error: status-${status} message-${codeMessage[status]}`);
-    // return Promise.reject(error); 非业务异常无需抛出错误 内部吞掉
-    return null;
+    // 抛出错误 中断流程 减少判空操作
+    return Promise.reject(error);
   }
 );
 
