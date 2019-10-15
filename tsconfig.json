@@ -19,7 +19,6 @@
     "noEmit": true,
     "jsx": "preserve",
     "experimentalDecorators": true,
-    "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "noImplicitThis": false
   },
   "include": ["src"]

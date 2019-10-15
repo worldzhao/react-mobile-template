@@ -1,37 +1,28 @@
-import { getUser, postUser } from '@/services';
-import { GetUserParams, PostUserParams, DemoModelState } from '@/typings';
+import { RootState, RootDispatch } from '@/store';
+import { login } from '@/services';
+import { LoginParams, DemoModelState } from '@/schemas';
 
-export default {
-  state: ({
-    userDataGet: null,
-    userDataPost: null
-  } as any) as DemoModelState,
+const initialState = (null as any) as DemoModelState;
 
-  effects: {
-    async getUserAsync(payload: GetUserParams) {
-      const res = await getUser(payload);
-      this.getUser(res);
-    },
+const model = {
+  state: initialState,
 
-    async postUserAsync(payload: PostUserParams) {
-      const res = await postUser(payload);
-      this.postUser(res);
+  effects: (dispatch: RootDispatch) => ({
+    async loginAsync(payload: LoginParams, rootState: RootState) {
+      const res = await login(payload);
+      dispatch.demo.login(res);
+      return res;
     }
-  },
+  }),
 
   reducers: {
-    getUser(state: DemoModelState, payload: DemoModelState['userDataGet']) {
+    login(state: DemoModelState, payload: DemoModelState['userInfo']) {
       return {
         ...state,
-        userDataGet: payload
-      };
-    },
-
-    postUser(state: DemoModelState, payload: DemoModelState['userDataPost']) {
-      return {
-        ...state,
-        userDataPost: payload
+        userInfo: payload
       };
     }
   }
 };
+
+export default model;

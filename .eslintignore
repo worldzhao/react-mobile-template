@@ -5,3 +5,4 @@ config/
 public/
 scripts/
 mock/
+iris.config.js

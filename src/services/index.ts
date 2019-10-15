@@ -1,1 +1,1 @@
-export { getUser, postUser } from './demo';
+export * from './demo';

@@ -1,4 +1,5 @@
-import 'react-app-polyfill/stable';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 import '@/common/scripts/rem';
 import '@/common/styles/index.scss';
 import Router from '@/router';

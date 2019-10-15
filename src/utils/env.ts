@@ -11,6 +11,8 @@ const ua = navigator.userAgent.toLowerCase();
 
 export default {
   isDev: REACT_APP_ENV === 'dev',
+  isTest: REACT_APP_ENV === 'test',
+  isUat: REACT_APP_ENV === 'uat',
   isProd: REACT_APP_ENV === 'prod',
   isAndroid: /linux|android/.test(ua),
   isSafari: /safari/.test(ua) && !/chrome/.test(ua),

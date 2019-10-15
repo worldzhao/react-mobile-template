@@ -1,0 +1,61 @@
+@import '~@/common/styles/index.scss';
+
+// 按照2倍图的像素写即可 无需使用预处理器px2rem()方法
+// 如果不想转为rem  可以使用PX。 通常文本内容不需要等比缩放
+// 屏幕越大看得越多font-size
+// 可能需要用到 PX 而非 px => rem
+
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.label {
+  margin: 20px;
+  display: inline-block;
+}
+
+.input {
+  outline-style: none;
+  /* prettier-ignore */
+  border: 1PX solid #ccc;
+  /* prettier-ignore */
+  border-radius: 3PX;
+  padding: 18px 28px;
+  width: 400px;
+  font-size: 28px;
+
+  &:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  }
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+.submit-btn {
+  margin-top: 30px;
+  background-color: skyblue;
+  border: none;
+  box-shadow: 0 0 0.61538462em rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+  color: #fff;
+  outline: none;
+  width: 200px;
+  height: 60px;
+
+  &__disabled {
+    background-color: #ccc;
+  }
+
+  &__loading {
+    background-color: black;
+  }
+}

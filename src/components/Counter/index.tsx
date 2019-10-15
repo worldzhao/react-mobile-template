@@ -7,7 +7,7 @@ interface Props {
   onDecrement(): void;
 }
 
-const FCCounter: React.FC<Props> = props => {
+const Counter: React.FC<Props> = props => {
   const { label, count, onIncrement, onDecrement } = props;
 
   return (
@@ -25,4 +25,4 @@ const FCCounter: React.FC<Props> = props => {
   );
 };
 
-export default FCCounter;
+export default Counter;

@@ -1,11 +1,14 @@
+const proxy = require('http-proxy-middleware');
+const mocker = require('mocker-api');
 const path = require('path');
-const apiMocker = require('mocker-api');
+const _ = require('lodash');
+const paths = require('./paths');
+
+const proxyConfig = _.get(require(paths.irisConfig), 'proxy', {}) || {};
 
 module.exports = function(app) {
-  apiMocker(app, path.resolve(__dirname, '../mock/index.js'), {
-    proxy: {
-      '/api/(.*)': 'http://gank.io/'
-    },
-    changeHost: true
+  Object.keys(proxyConfig).forEach(pattern => {
+    app.use(pattern, proxy(proxyConfig[pattern]));
   });
+  mocker(app, path.resolve(__dirname, '../mock'));
 };

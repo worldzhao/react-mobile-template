@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { Response } from '@/typings';
+import { Response } from '@/schemas';
 
 const codeMessage: { [key: string]: string } = {
   200: '服务器成功返回请求的数据。',
@@ -47,7 +47,7 @@ instance.interceptors.response.use(
   },
   error => {
     const { status } = error.response;
-    // 根据不同code 可进行不同提示
+    // 根据不同code 可进行不同操作
     console.warn(`http error: status-${status} message-${codeMessage[status]}`);
     // 抛出错误 中断流程 减少判空操作
     return Promise.reject(error);
