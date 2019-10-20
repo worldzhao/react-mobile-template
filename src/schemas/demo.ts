@@ -3,12 +3,12 @@ export interface LoginParams {
   password: string;
 }
 
-export interface LoginResponse {
+export type LoginResponse = {
   id: number;
   age: number;
   username: string;
-}
+} | null;
 
 export interface DemoModelState {
-  userInfo: LoginResponse | null;
+  userInfo: LoginResponse;
 }

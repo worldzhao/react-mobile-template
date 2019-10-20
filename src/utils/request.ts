@@ -54,7 +54,7 @@ instance.interceptors.response.use(
   }
 );
 
-function request<T>(config: AxiosRequestConfig): Promise<T> | null {
+function request<T>(config: AxiosRequestConfig): Promise<T> {
   return (instance.request<Response<T>>(config) as any) as Promise<T>;
 }
 
