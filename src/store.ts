@@ -5,7 +5,7 @@ import * as models from './models';
 
 export const store = init({
   models,
-  plugins: [createLoadingPlugin({})]
+  plugins: [createLoadingPlugin({})],
 });
 
 export type RootState = RematchRootState<typeof models> & LoadingState<typeof models>;

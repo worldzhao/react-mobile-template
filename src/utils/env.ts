@@ -18,7 +18,8 @@ export default {
   isSafari: /safari/.test(ua) && !/chrome/.test(ua),
   isIos: !!ua.match(/\(i[^;]+;( u;)? cpu.+mac os x/),
   isWeiXin: /micromessenger/.test(ua),
+  isNative: /iting/i.test(ua),
   isMobile: /mobile/.test(ua),
   isWeiXinDebug: /wxdebug/.test(window.location.href),
-  isSupportWebp
+  isSupportWebp,
 };

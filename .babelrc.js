@@ -1,3 +1,4 @@
 module.exports = {
-  presets: [['react-app', { flow: false, typescript: true }]]
+  presets: [['react-app', { flow: false, typescript: true }]],
+  plugins: ['react-hot-loader/babel']
 };

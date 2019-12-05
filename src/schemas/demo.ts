@@ -1,14 +1,11 @@
-export interface LoginParams {
-  username: string;
-  password: string;
-}
-
-export type LoginResponse = {
-  id: number;
-  age: number;
-  username: string;
-} | null;
-
-export interface DemoModelState {
-  userInfo: LoginResponse;
+export interface LoginAPI {
+  Params: {
+    username: string;
+    password: string;
+  };
+  Response: {
+    id: number;
+    age: number;
+    username: string;
+  };
 }

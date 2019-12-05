@@ -23,6 +23,7 @@ const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const WebpackBar = require('webpackbar');
 
 //是否开启打包分析工具
 const shouldAnalyzeBundle = process.env.REACT_APP_ANALYZE === 'true';
@@ -445,7 +446,20 @@ module.exports = function(webpackEnv) {
       ]
     },
     plugins: [
+      new WebpackBar(),
       shouldAnalyzeBundle ? new BundleAnalyzerPlugin() : undefined,
+      isEnvProduction &&
+      new webpack.NamedChunksPlugin(chunk => {
+        if (chunk.name) {
+          return chunk.name;
+        }
+        return [...chunk._modules]
+          .map(m =>
+            path.relative(m.context, m.userRequest.substring(0, m.userRequest.lastIndexOf('.'))),
+          )
+          .join('_');
+      }),
+
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(

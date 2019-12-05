@@ -1,10 +1,9 @@
 import { request } from '@/utils';
-import { LoginParams, LoginResponse } from '@/schemas';
+import { DemoSchema } from '@/schemas';
 
-export const login = (data: LoginParams) => {
-  return request<LoginResponse>({
+export const login = (data: DemoSchema.LoginAPI['Params']) =>
+  request<DemoSchema.LoginAPI['Response']>({
     url: '/login/account',
     method: 'post',
-    data
+    data,
   });
-};

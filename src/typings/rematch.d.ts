@@ -38,10 +38,10 @@ type Reducer2connect<R extends Function> = R extends (state: infer S, ...payload
   : () => void;
 
 type Effect2connect<E extends Function> = E extends () => infer S
-  ? () => Promise<S>
+  ? () => S
   : E extends (payload: infer P, ...args: any[]) => infer S
-  ? (payload: P) => Promise<S>
-  : () => Promise<any>;
+  ? (payload: P) => S
+  : () => any;
 
 // type ReducerFromModel<R extends Function> = R extends (state: infer S, payload: infer P) => infer S ? S : 'no';
 export type RematchRootDispatch<M extends Models> = {

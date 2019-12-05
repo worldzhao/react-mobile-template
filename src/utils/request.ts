@@ -1,4 +1,5 @@
-import axios, { AxiosRequestConfig } from 'axios';
+/* eslint-disable no-console */
+import axios, { AxiosRequestConfig, AxiosError } from 'axios';
 import { Response } from '@/schemas';
 
 const codeMessage: { [key: string]: string } = {
@@ -16,42 +17,46 @@ const codeMessage: { [key: string]: string } = {
   500: '服务器发生错误，请检查服务器。',
   502: '网关错误。',
   503: '服务不可用，服务器暂时过载或维护。',
-  504: '网关超时。'
+  504: '网关超时。',
+};
+
+const errorHandler = (status: number) => {
+  switch (status) {
+    default:
+      console.error(codeMessage[status]);
+      break;
+  }
 };
 
 const instance = axios.create({
-  timeout: 3000 // 超时时间 3s
+  timeout: 5000, // 超时时间 3s
 });
 
 // 增加请求拦截器
-instance.interceptors.request.use(
-  config => {
-    return config;
-  },
-  error => {
-    return Promise.reject(error);
-  }
-);
+instance.interceptors.request.use(config => config, error => Promise.reject(error));
 
 // 增加响应拦截器
 instance.interceptors.response.use(
   response => {
     const { data } = response;
     // 存在业务异常 抛出给业务代码去捕获
-    // 此处必须和后端约定好{code:number;msg:string;data:any的response数据结构}
+    // 此处和后端约定好{code:number;msg:string;data:any的response数据结构}
     if (data.code !== 0) {
       return Promise.reject(data);
     }
     // 业务正常流程返回数据
     return data.data;
   },
-  error => {
-    const { status } = error.response;
-    // 根据不同code 可进行不同操作
-    console.warn(`http error: status-${status} message-${codeMessage[status]}`);
+  (error: AxiosError) => {
+    const { response } = error;
+    if (response) {
+      const { status } = response;
+      // 根据不同code 可进行不同操作
+      errorHandler(status);
+    }
     // 抛出错误 中断流程 减少判空操作
     return Promise.reject(error);
-  }
+  },
 );
 
 function request<T>(config: AxiosRequestConfig): Promise<T> {

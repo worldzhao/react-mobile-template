@@ -1,6 +1,7 @@
 import React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router';
-import BasicLayout from './basicLayout';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
+
+import BasicLayout from './basic_layout';
 
 const Layout: React.FC<RouteComponentProps> = props => {
   const { children } = props;

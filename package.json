@@ -1,7 +1,7 @@
 {
-  "name": "react-template-mobile",
+  "name": "h5-template-ts",
   "version": "1.0.0",
-  "description": "",
+  "description": "A React template for mobile app",
   "author": {
     "name": "worldzhao",
     "email": "1007326924@qq.com"
@@ -56,6 +56,7 @@
     "core-js": "^3.3.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-hot-loader": "^4.12.15",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.1",
@@ -78,6 +79,7 @@
     "@types/react-router-dom": "^4.3.4",
     "@typescript-eslint/eslint-plugin": "1.x",
     "@typescript-eslint/parser": "1.x",
+    "@umijs/fabric": "^1.2.1",
     "babel-eslint": "10.0.1",
     "babel-jest": "^24.8.0",
     "babel-loader": "8.0.5",
@@ -139,13 +141,14 @@
     "style-loader": "0.23.1",
     "terser-webpack-plugin": "1.2.3",
     "ts-pnp": "1.1.2",
-    "typescript": "^3.5.3",
+    "typescript": "3.5.3",
     "url-loader": "1.1.2",
     "utility-types": "^3.7.0",
     "webpack": "4.29.6",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-dev-server": "3.2.1",
-    "webpack-manifest-plugin": "2.0.4"
+    "webpack-manifest-plugin": "2.0.4",
+    "webpackbar": "^4.0.0"
   },
   "jest": {
     "collectCoverageFrom": [

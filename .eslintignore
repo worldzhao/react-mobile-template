@@ -6,3 +6,5 @@ public/
 scripts/
 mock/
 iris.config.js
+src/typings
+src/schemas

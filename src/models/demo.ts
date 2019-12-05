@@ -1,28 +1,31 @@
+/* eslint-disable  @typescript-eslint/no-unused-vars */
 import { RootState, RootDispatch } from '@/store';
-import { login } from '@/services';
-import { LoginParams, DemoModelState } from '@/schemas';
+import { DemoService } from '@/services';
+import { DemoSchema } from '@/schemas';
 
-const initialState = (null as any) as DemoModelState;
+export interface ModelState {
+  userInfo: DemoSchema.LoginAPI['Response'] | null;
+}
 
-const model = {
+const initialState: ModelState = { userInfo: null };
+
+export default {
   state: initialState,
 
   effects: (dispatch: RootDispatch) => ({
-    async loginAsync(payload: LoginParams, rootState: RootState) {
-      const res = await login(payload);
-      dispatch.demo.login(res);
+    async loginAsync(payload: DemoSchema.LoginAPI['Params'], rootState: RootState) {
+      const res = await DemoService.login(payload);
+      dispatch.demo.setUserInfo(res);
       return res;
-    }
+    },
   }),
 
   reducers: {
-    login(state: DemoModelState, payload: DemoModelState['userInfo']) {
+    setUserInfo(state: ModelState, payload: ModelState['userInfo']) {
       return {
         ...state,
-        userInfo: payload
+        userInfo: payload,
       };
-    }
-  }
+    },
+  },
 };
-
-export default model;

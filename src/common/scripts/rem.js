@@ -34,7 +34,7 @@
     metaElement.setAttribute('name', 'viewport');
     metaElement.setAttribute(
       'content',
-      'width=device-width,initial-scale=' + scale + ',user-scalable=no'
+      'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no',
     );
     if (docEl.firstElementChild) {
       docEl.firstElementChild.appendChild(metaElement);
@@ -50,7 +50,7 @@
       clearTimeout(refreshRootFont);
       refreshRootFont = setTimeout(rootFont, 300);
     },
-    false
+    false,
   );
   win.addEventListener(
     'pageshow',
@@ -60,7 +60,7 @@
         refreshRootFont = setTimeout(rootFont, 300);
       }
     },
-    false
+    false,
   );
   rootFont();
 
@@ -69,7 +69,24 @@
     if (width / dpr > 540) {
       width = 540 * dpr;
     }
-    var root = width / 10;
-    docEl.style.fontSize = root + 'px';
+    var rootFontSize = width / 10;
+    // 设置根节点font-size
+    docEl.style.fontSize = rootFontSize + 'px';
+    // 矫正魅族 16系列以及三星s10系列在安卓webview下 1 rem !== 1 rootFontSize的问题
+    var div = document.createElement('div');
+    div.style.width = '10rem';
+    div.style.height = '0';
+    document.body.appendChild(div);
+    // 理想宽度
+    var ideal = width;
+    // 实际宽度
+    var real = div.clientWidth;
+    // 矫正比例
+    var rmd = real / ideal;
+
+    if (rmd !== 1) {
+      docEl.style.fontSize = rootFontSize / rmd + 'px';
+    }
+    document.body.removeChild(div);
   }
 })(window, document);
