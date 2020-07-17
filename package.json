@@ -118,7 +118,7 @@
     "jest-resolve": "24.7.1",
     "jest-watch-typeahead": "0.3.0",
     "lint-staged": "^8.1.7",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "mini-css-extract-plugin": "0.5.0",
     "mocker-api": "^1.7.6",
     "mockjs": "^1.0.1-beta3",
